@@ -25,160 +25,76 @@ namespace Calculate
 
 public partial class Calculator : Form
     {
-        private List<string> containerOfNumbers;
+        public Operand num1 = new Operand();
+        public Operand num2 = new Operand();
+        public string lastOper = "";
 
-        private List<string> listOfString = new List<string> { "+", "-", "*", "/" };
+        private List<string> listOfOperators = new List<string> { "+", "-", "*", "/" };
 
         public Calculator()
         {
             InitializeComponent();
-            containerOfNumbers = new List<string> {};
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            containerOfNumbers.Add("1");
-            textPanelChange();
-        }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("2");
-            textPanelChange();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("3");
-            textPanelChange();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("4");
-            textPanelChange();
-        }
-        private void button5_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("5");
-            textPanelChange();
-        }
-       private void button6_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("6");
-            textPanelChange();
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("7");
-            textPanelChange();
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("8");
-            textPanelChange();
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("9");
-            textPanelChange();
-        }
-
-        private void button0_Click(object sender, EventArgs e)
-        {
-            containerOfNumbers.Add("0");
-            textPanelChange();
-        }
-        private void operatorCalculate(string operCalc) 
-        {
-            int result = calculate();
-            containerOfNumbers.Clear();
-            containerOfNumbers.Add(Convert.ToString(result));
-
-            if (operCalc != "=")
-            {
-                if (containerOfNumbers.Count != 0 && listOfString.Contains(containerOfNumbers[containerOfNumbers.Count - 1]))
-                {
-                    containerOfNumbers.RemoveAt(containerOfNumbers.Count - 1);
-                }
-
-                containerOfNumbers.Add(operCalc);
-            }
-            textPanelChange();
-
+            proseccing((sender as Button).Text);
         }
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            operatorCalculate("-");
+            proseccing((sender as Button).Text);
         }
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            operatorCalculate("+");
+            proseccing((sender as Button).Text);
+           
+        }
+        private void buttonShowResult_Click(object sender, EventArgs e)
+        {
+            proseccing("=");
+        }
+        private void proseccing(string input)
+        {
+
+            if (listOfOperators.Contains(input) 
+)
+            {
+                lastOper = input;
+                string blaBla = Convert.ToString(calculate());
+                num1.clear();
+                num1.update(blaBla);
+                num2.clear();
+                
+            }
+            else if (lastOper == "")
+            {
+                num1.update(input);
+            }
+
+            else 
+            {
+                num2.update(input);
+            }
+          
+            textPanelChange();
+
         }
 
         private void textPanelChange()
         {
-           textPanel.Text = String.Join("", containerOfNumbers);
-            
+            textPanel.Text = num1.getRaw() + lastOper + num2.getRaw();
         }
-        private void buttonShowResult_Click(object sender, EventArgs e)
+
+
+
+        public double calculate() 
         {
-            operatorCalculate("=");
+
+            return num1.getData() + num2.getData();
+ 
         }
-
-
-        private int calculate() 
-        {
-            int results = 0;
-
-            for (int index = 0; index < containerOfNumbers.Count; index++)
-            {
-                int lastIndex = containerOfNumbers.Count - 1;
-
-                if (containerOfNumbers[index] == "+" && index != lastIndex)
-                {
-                    results = Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(0, index)))
-                    + Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(index + 1, containerOfNumbers.Count - index - 1)));
-                    return results;
-                }
-
-                if (containerOfNumbers[index] == "-" && index != lastIndex)
-                {
-                    results = Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(0, index)))
-                    - Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(index + 1, containerOfNumbers.Count - index - 1)));
-                    return results;
-                }
-
-                if (containerOfNumbers[index] == "/")
-                {
-                    results = Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(0, index)))
-                    / Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(index + 1, containerOfNumbers.Count - index - 1)));
-                    return results;
-                }
-
-                if (containerOfNumbers[index] == "*")
-                {
-                    results = Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(0, index)))
-                    * Convert.ToInt32(string.Join("", containerOfNumbers.GetRange(index + 1, containerOfNumbers.Count - index - 1)));
-                    return results;
-                }
-
-            }
-            if (listOfString.Contains(containerOfNumbers[containerOfNumbers.Count - 1])) 
-            {
-                results = Convert.ToInt32(string.Join("", containerOfNumbers[0]));
-            }
-            else if (containerOfNumbers.Count != 0)
-            {
-                results = Convert.ToInt32(string.Join("", containerOfNumbers));
-            }
-
-            return results;
-        }
+        
     }
 
 
