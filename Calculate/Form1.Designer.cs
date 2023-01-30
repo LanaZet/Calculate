@@ -42,6 +42,10 @@
             this.buttonPlus = new System.Windows.Forms.Button();
             this.textPanel = new System.Windows.Forms.TextBox();
             this.buttonShowResult = new System.Windows.Forms.Button();
+            this.buttonDelite = new System.Windows.Forms.Button();
+            this.buttonMultiply = new System.Windows.Forms.Button();
+            this.buttonPoint = new System.Windows.Forms.Button();
+            this.buttonCkear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -156,25 +160,25 @@
             // 
             // buttonMinus
             // 
-            this.buttonMinus.Location = new System.Drawing.Point(135, 25);
+            this.buttonMinus.Location = new System.Drawing.Point(135, 72);
             this.buttonMinus.Margin = new System.Windows.Forms.Padding(2);
             this.buttonMinus.Name = "buttonMinus";
             this.buttonMinus.Size = new System.Drawing.Size(38, 41);
             this.buttonMinus.TabIndex = 10;
             this.buttonMinus.Text = "-";
             this.buttonMinus.UseVisualStyleBackColor = true;
-            this.buttonMinus.Click += new System.EventHandler(this.buttonMinus_Click);
+            this.buttonMinus.Click += new System.EventHandler(this.buttonPlus_Click);
             // 
             // buttonPlus
             // 
-            this.buttonPlus.Location = new System.Drawing.Point(135, 71);
+            this.buttonPlus.Location = new System.Drawing.Point(135, 25);
             this.buttonPlus.Margin = new System.Windows.Forms.Padding(2);
             this.buttonPlus.Name = "buttonPlus";
             this.buttonPlus.Size = new System.Drawing.Size(38, 41);
             this.buttonPlus.TabIndex = 11;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = true;
-            this.buttonPlus.Click += new System.EventHandler(this.button1_Click);
+            this.buttonPlus.Click += new System.EventHandler(this.buttonPlus_Click);
             // 
             // textPanel
             // 
@@ -196,11 +200,58 @@
             this.buttonShowResult.UseVisualStyleBackColor = true;
             this.buttonShowResult.Click += new System.EventHandler(this.buttonShowResult_Click);
             // 
+            // buttonDelite
+            // 
+            this.buttonDelite.Location = new System.Drawing.Point(135, 117);
+            this.buttonDelite.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDelite.Name = "buttonDelite";
+            this.buttonDelite.Size = new System.Drawing.Size(38, 41);
+            this.buttonDelite.TabIndex = 14;
+            this.buttonDelite.Text = "/";
+            this.buttonDelite.UseVisualStyleBackColor = true;
+            this.buttonDelite.Click += new System.EventHandler(this.buttonPlus_Click);
+            // 
+            // buttonMultiply
+            // 
+            this.buttonMultiply.Location = new System.Drawing.Point(135, 162);
+            this.buttonMultiply.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonMultiply.Name = "buttonMultiply";
+            this.buttonMultiply.Size = new System.Drawing.Size(38, 41);
+            this.buttonMultiply.TabIndex = 15;
+            this.buttonMultiply.Text = "*";
+            this.buttonMultiply.UseVisualStyleBackColor = true;
+            this.buttonMultiply.Click += new System.EventHandler(this.buttonPlus_Click);
+            // 
+            // buttonPoint
+            // 
+            this.buttonPoint.Location = new System.Drawing.Point(9, 162);
+            this.buttonPoint.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonPoint.Name = "buttonPoint";
+            this.buttonPoint.Size = new System.Drawing.Size(38, 41);
+            this.buttonPoint.TabIndex = 16;
+            this.buttonPoint.Text = ",";
+            this.buttonPoint.UseVisualStyleBackColor = true;
+            this.buttonPoint.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonCkear
+            // 
+            this.buttonCkear.Location = new System.Drawing.Point(178, 25);
+            this.buttonCkear.Name = "buttonCkear";
+            this.buttonCkear.Size = new System.Drawing.Size(41, 41);
+            this.buttonCkear.TabIndex = 17;
+            this.buttonCkear.Text = "C";
+            this.buttonCkear.UseVisualStyleBackColor = true;
+            this.buttonCkear.Click += new System.EventHandler(this.buttonCkear_Click);
+            // 
             // Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 273);
+            this.Controls.Add(this.buttonCkear);
+            this.Controls.Add(this.buttonPoint);
+            this.Controls.Add(this.buttonMultiply);
+            this.Controls.Add(this.buttonDelite);
             this.Controls.Add(this.buttonShowResult);
             this.Controls.Add(this.textPanel);
             this.Controls.Add(this.button9);
@@ -240,6 +291,10 @@
         private System.Windows.Forms.Button buttonPlus;
         private System.Windows.Forms.TextBox textPanel;
         private System.Windows.Forms.Button buttonShowResult;
+        private System.Windows.Forms.Button buttonDelite;
+        private System.Windows.Forms.Button buttonMultiply;
+        private System.Windows.Forms.Button buttonPoint;
+        private System.Windows.Forms.Button buttonCkear;
     }
 }
 

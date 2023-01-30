@@ -14,14 +14,6 @@ using System.Windows.Forms;
 
 namespace Calculate
 { 
-    enum Operation
-    {
-        Add,
-        Subtract,
-        Multiply,
-        Divide
-    }
-
 
 public partial class Calculator : Form
     {
@@ -29,7 +21,7 @@ public partial class Calculator : Form
         public Operand num2 = new Operand();
         public string lastOper = "";
 
-        private List<string> listOfOperators = new List<string> { "+", "-", "*", "/" };
+        private List<string> listOfOperators = new List<string> { "+", "-", "*", "/", "="};
 
         public Calculator()
         {
@@ -39,62 +31,82 @@ public partial class Calculator : Form
         {
             proseccing((sender as Button).Text);
         }
-
-        private void buttonMinus_Click(object sender, EventArgs e)
-        {
-            proseccing((sender as Button).Text);
-        }
-
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            proseccing((sender as Button).Text);
-           
+            proseccing((sender as Button).Text);         
         }
         private void buttonShowResult_Click(object sender, EventArgs e)
         {
-            proseccing("=");
+            proseccing((sender as Button).Text);
+
         }
         private void proseccing(string input)
         {
 
-            if (listOfOperators.Contains(input) 
+            if (listOfOperators.Contains(input)
 )
             {
+                string blaBla = Convert.ToString(calculate(lastOper));
                 lastOper = input;
-                string blaBla = Convert.ToString(calculate());
+
                 num1.clear();
                 num1.update(blaBla);
                 num2.clear();
-                
+
             }
+
             else if (lastOper == "")
             {
                 num1.update(input);
             }
 
-            else 
+            else
             {
                 num2.update(input);
             }
-          
-            textPanelChange();
 
+            textPanelChange();
         }
 
         private void textPanelChange()
         {
             textPanel.Text = num1.getRaw() + lastOper + num2.getRaw();
+           
         }
 
-
-
-        public double calculate() 
+        public double calculate(string input) 
         {
-
-            return num1.getData() + num2.getData();
+            if (input == "+")
+            {
+                return num1.getData() + num2.getData();
  
+            }
+
+            else if (input == "-")
+            {
+                return num1.getData() - num2.getData();
+            }
+
+            else if (input == "*")
+            {
+                return num1.getData() * num2.getData();
+            }
+
+            else if (input == "/")
+            {
+                return num1.getData() / num2.getData();
+            }
+           
+            return num1.getData();
         }
-        
+
+        private void buttonCkear_Click(object sender, EventArgs e)
+        {
+            textPanel.Clear();
+            num1.clear();
+            num2.clear();
+            lastOper = "";
+        }
     }
 
 

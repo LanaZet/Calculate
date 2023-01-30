@@ -24,7 +24,7 @@ namespace Calculate
         }
         public void clear() 
         {
-            data= null;
+            data = "";
         }
     }
 }
