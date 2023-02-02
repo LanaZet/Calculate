@@ -19,9 +19,7 @@ public partial class Calculator : Form
     {
         public Operand num1 = new Operand();
         public Operand num2 = new Operand();
-        public string lastOper = "";
-
-        private List<string> listOfOperators = new List<string> { "+", "-", "*", "/", "="};
+        public string lastOper;
 
         public Calculator()
         {
@@ -29,84 +27,96 @@ public partial class Calculator : Form
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            proseccing((sender as Button).Text);
+            if (lastOper == "=")
+            {
+                textPanel.Clear();
+                lastOper = "";
+            }
+            textPanel.Text += (sender as Button).Text;
         }
-        private void buttonPlus_Click(object sender, EventArgs e)
+        
+        public void buttonPlus_Click(object sender, EventArgs e)
         {
-            proseccing((sender as Button).Text);         
+            if (num2.getRaw() != "")
+            {
+                lastOper = (sender as Button).Text;
+                buttonShowResult_Click(sender, e);
+            }
+
+            else 
+            {
+                num1.update(textPanel.Text);
+                lastOper = (sender as Button).Text;
+                textPanel.Clear();
+            }
         }
-        private void buttonShowResult_Click(object sender, EventArgs e)
+        public void buttonShowResult_Click(object sender, EventArgs e)
         {
-            proseccing((sender as Button).Text);
-
+            num2.update(textPanel.Text);
+            textPanel.Text = Convert.ToString(calculate(num1.getData(), lastOper, num2.getData()));
+            lastOper = "=";
+            num1.clear();
+            num2.clear();
         }
-        private void proseccing(string input)
+        public double calculate(double num1, string op, double num2) 
         {
-
-            if (listOfOperators.Contains(input)
-)
+            if (op == "+")
             {
-                string blaBla = Convert.ToString(calculate(lastOper));
-                lastOper = input;
-
-                num1.clear();
-                num1.update(blaBla);
-                num2.clear();
-
+                return num1 + num2;
             }
 
-            else if (lastOper == "")
+            else if (op == "-")
             {
-                num1.update(input);
+                return num1 - num2;
             }
 
-            else
+            else if (op == "*")
             {
-                num2.update(input);
+                return num1 * num2;
             }
 
-            textPanelChange();
+            else if (op == "/")
+            {
+                return num1 / num2;
+            }
+            else if (op == "%") 
+            {
+                return (num1 * num2) / 100;
+            }
+            return num1;
         }
-
-        private void textPanelChange()
-        {
-            textPanel.Text = num1.getRaw() + lastOper + num2.getRaw();
-           
-        }
-
-        public double calculate(string input) 
-        {
-            if (input == "+")
-            {
-                return num1.getData() + num2.getData();
- 
-            }
-
-            else if (input == "-")
-            {
-                return num1.getData() - num2.getData();
-            }
-
-            else if (input == "*")
-            {
-                return num1.getData() * num2.getData();
-            }
-
-            else if (input == "/")
-            {
-                return num1.getData() / num2.getData();
-            }
-           
-            return num1.getData();
-        }
-
         private void buttonCkear_Click(object sender, EventArgs e)
         {
-            textPanel.Clear();
+            textPanel.Text = "";
             num1.clear();
             num2.clear();
             lastOper = "";
+
         }
+        private void buttonNegativeNumber_Click(object sender, EventArgs e)
+        {
+            if (textPanel.Text != " ") 
+            {
+                if (textPanel.Text == "-")
+                {
+                    textPanel.Text.Remove(0, 1);
+                }
+                else 
+                {
+                    
+                   textPanel.Text = textPanel.Text = '-' + textPanel.Text;
+                }
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (textPanel.Text != "") 
+            {
+                textPanel.Text = textPanel.Text.Remove(textPanel.Text.Length -1, 1);
+            }
+        }
+
     }
 
 
